@@ -25,9 +25,9 @@ class Cat: public Animal
 	~Cat();
 	Cat(const Cat& other);
 	Cat& operator=(const Cat& other);
-	Brain* get_brain() const;
 
 	virtual void makeSound() const;
+	Brain* get_brain() const;
 };
 
 #endif
