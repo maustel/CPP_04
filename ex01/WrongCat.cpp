@@ -1,40 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Dog.cpp                                            :+:      :+:    :+:   */
+/*   WrongWrongCat.cpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: maustel <maustel@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/06 10:55:09 by maustel           #+#    #+#             */
-/*   Updated: 2025/03/06 10:55:09 by maustel          ###   ########.fr       */
+/*   Created: 2025/03/06 11:44:38 by maustel           #+#    #+#             */
+/*   Updated: 2025/03/06 11:44:38 by maustel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Dog.hpp"
+#include "WrongCat.hpp"
 
-Dog::Dog(): Animal("Dog")
+WrongCat::WrongCat(): WrongAnimal("WrongCat")
 {
-	std::cout << "Dog Default Constructor." << std::endl;
+	std::cout << "WrongCat Default Constructor." << std::endl;
 }
 
-Dog::~Dog()
+WrongCat::~WrongCat()
 {
-	std::cout << "Dog Destructor." << std::endl;
+	std::cout << "WrongCat Destructor." << std::endl;
 }
 
-Dog::Dog(const Dog& other): Animal(other)
+WrongCat::WrongCat(const WrongCat& other): WrongAnimal(other)
 {
-	*this = other;
-	std::cout << "Dog copy constructor." << std::endl;
+	std::cout << "WrongCat copy constructor." << std::endl;
 }
 
-Dog &Dog::operator=(const Dog& other)
+WrongCat &WrongCat::operator=(const WrongCat& other)
 {
 	this->type = other.type;
 	return (*this);
 }
 
-void Dog::makeSound() const
+void WrongCat::makeSound() const
 {
-	std::cout << "Wuff Wuff!" << std::endl;
+	std::cout << "Miauuuuuuuu!" << std::endl;
 }
