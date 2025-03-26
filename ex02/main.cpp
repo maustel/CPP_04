@@ -13,92 +13,102 @@
 #include "AAnimal.hpp"
 #include "Cat.hpp"
 #include "Dog.hpp"
+#include "WrongAnimal.hpp"
 #include "WrongCat.hpp"
+#include "colors.h"
 
 /*
-	exercise is about abstract classes
-	default Animal class should not be instantiable
-	abstract class should have prefix A -> AAnimal
-	transform class to abstract by setting member function to:
-	virtual void	makeSound() const = 0;
-	-> we have no definition of this method
-	-> missing behaviour = abstract
-	-> children classes must have the behaviour
+	deleting Dog and Cat
+	-> virtual is important for baseclass destructor. Otherwise it will be only called the
+	base class destructor (Aanimal) when you delete through a base class pointer.
 
-	abstract class: can have both: methods with and without behaviour and also attributes
-	interface = abstract behaviour only = pure abstract class
+	Shallow copy creates shared pointers to the same memory.
+	->this means, if I change Brain copy, also copied Brain will be changed
+	and it will do double free
+	Deep copy creates independent copies of all resources.
 */
 int main()
 {
-	//-------------------------------------------
-	// test from ex00
-	//--------------------------------------------
-	// const AAnimal* meta = new AAnimal(); // object of abstract class type "AAnimal" is not allowed
-	const AAnimal* j = new Dog();
-	const AAnimal* i = new Cat();
-	std::cout << j->getType() << " " << std::endl;
-	std::cout << i->getType() << " " << std::endl;
-	i->makeSound();
-	j->makeSound();
-	delete j;
-	delete i;
-
-	//-------------------------------------------
-	// tests from ex01
-	//-------------------------------------------
 	//-------------------------------------
 	// test from subject
 	//.....................................
+	std::cout << MAG << "[---------- test from subject ----------]" << RESET << std::endl;
+	std::cout << YEL << "[---------- new Dog ----------]" << RESET << std::endl;
+	const AAnimal* j = new Dog();
+	std::cout << YEL << "[---------- new Cat ----------]" << RESET << std::endl;
+	const AAnimal* i = new Cat();
 
-	// const AAnimal* j = new Dog();
-	// const AAnimal* i = new Cat();
-
-	// delete j;
-	// delete i;
+	std::cout << YEL << "[---------- delete Dog ----------]" << RESET << std::endl;
+	delete j;
+	std::cout << YEL << "[---------- delete Cat ----------]" << RESET << std::endl;
+	delete i;
 
 	//----------------------------------------------------
 	// test for array create, fill and delete as Aanimals
 	// ---------------------------------------------------
+	std::cout << MAG << "[---------- test for array create, fill and delete as Aanimals ----------]" << RESET << std::endl;
 
-	// int n = 4;
-	// AAnimal *animals[n];
-	// animals[0] = new Dog();
-	// animals[1] = new Dog();
-	// animals[2] = new Cat();
-	// animals[3] = new Cat();
+	int n = 4;
+	std::cout << YEL << "[---------- create Aanimal array ----------]" << RESET << std::endl;
+	AAnimal *Aanimals[n];
+	std::cout << std::endl;
+	for(int i = 0; i < n; i++)
+	{
+		if (i % 2)
+			Aanimals[i] = new Dog();
+		else
+			Aanimals[i] = new Cat();
+		std::cout << std::endl;
+	}
 
-	// for (int i = 0; i < n; i++)
-	// 	delete animals[i];
+	std::cout << YEL << "[---------- delete Aanimal array ----------]" << RESET << std::endl;
+	for (int i = 0; i < n; i++)
+	{
+		delete Aanimals[i];
+		std::cout << std::endl;
+
+	}
 
 	//---------------------------------------
 	// test for deep copy
 	//---------------------------------------
-	// Cat carlo;
-	// carlo.get_brain()->set_idea(0, "Catch a mouse!");
-	// Cat minca(carlo);
-	// std::cout << "carlos Brain Address: " << carlo.get_brain() << std::endl;
-	// std::cout << "mincas Brain Address: " << minca.get_brain() << std::endl;
-	// std::cout << "carlos idea 0 : " << carlo.get_brain()->get_idea(0) << std::endl;
-	// std::cout << "mincas idea 0 : " << minca.get_brain()->get_idea(0) << std::endl;
-	// carlo.get_brain()->set_idea(1, "Go sleeping!");
-	// std::cout << "carlos idea 1 : " << carlo.get_brain()->get_idea(1) << std::endl;
-	// std::cout << "mincas idea 1 : " << minca.get_brain()->get_idea(1) << std::endl;
-	// minca.makeSound();
-	// carlo.makeSound();
+	std::cout << MAG << "[---------- tests for deep copy ----------]" << RESET << std::endl;
+
+	Cat carlo;
+	std::cout << std::endl;
+
+	carlo.get_brain()->set_idea(0, "Catch a mouse!");
+	Cat minca(carlo);
+	std::cout << std::endl;
+
+	std::cout << "carlos Brain Address: " << carlo.get_brain() << std::endl;
+	std::cout << "mincas Brain Address: " << minca.get_brain() << std::endl;
+	std::cout << "carlos idea 0 : " << carlo.get_brain()->get_idea(0) << std::endl;
+	std::cout << "mincas idea 0 : " << minca.get_brain()->get_idea(0) << std::endl;
+	carlo.get_brain()->set_idea(1, "Go sleeping!");
+	std::cout << "carlos idea 1 : " << carlo.get_brain()->get_idea(1) << std::endl;
+	std::cout << "mincas idea 1 : " << minca.get_brain()->get_idea(1) << std::endl;
 
 	//---------------------------------------
 	// test for deep copy -> same thing with dog
 	//---------------------------------------
-	// Dog milco;
-	// milco.get_brain()->set_idea(0, "Catch a cat!");
-	// Dog jackie(milco);
-	// std::cout << "milco Brain Address: " << milco.get_brain() << std::endl;
-	// std::cout << "jackie Brain Address: " << jackie.get_brain() << std::endl;
-	// std::cout << "milco idea 0 : " << milco.get_brain()->get_idea(0) << std::endl;
-	// std::cout << "jackie idea 0 : " << jackie.get_brain()->get_idea(0) << std::endl;
-	// milco.get_brain()->set_idea(1, "Go sleeping!");
-	// std::cout << "milco idea 1 : " << milco.get_brain()->get_idea(1) << std::endl;
-	// std::cout << "jackie idea 1 : " << jackie.get_brain()->get_idea(1) << std::endl;
+	std::cout << MAG << "[---------- tests for deep copy -> same thing with dog ----------]" << RESET << std::endl;
 
+	Dog milco;
+	std::cout << std::endl;
+
+	milco.get_brain()->set_idea(0, "Catch a cat!");
+	Dog jackie(milco);
+	std::cout << std::endl;
+
+	std::cout << "milco Brain Address: " << milco.get_brain() << std::endl;
+	std::cout << "jackie Brain Address: " << jackie.get_brain() << std::endl;
+	std::cout << "milco idea 0 : " << milco.get_brain()->get_idea(0) << std::endl;
+	std::cout << "jackie idea 0 : " << jackie.get_brain()->get_idea(0) << std::endl;
+	milco.get_brain()->set_idea(1, "Go sleeping!");
+	std::cout << "milco idea 1 : " << milco.get_brain()->get_idea(1) << std::endl;
+	std::cout << "jackie idea 1 : " << jackie.get_brain()->get_idea(1) << std::endl;
+
+	std::cout << MAG << "[---------- Destructors ----------]" << RESET << std::endl;
 	return 0;
 }

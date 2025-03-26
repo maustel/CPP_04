@@ -15,9 +15,11 @@
 /*
 Using the {} initializer syntax performs value-initialization on all array elements.
 */
-Brain::Brain(): _ideas{}
+Brain::Brain(): _ideas()
 {
 	std::cout << "Brain default constructor." << std::endl;
+	for (int i = 0; i < 100; i++)
+        _ideas[i] = "default idea";
 }
 
 Brain::~Brain()

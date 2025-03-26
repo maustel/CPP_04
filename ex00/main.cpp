@@ -15,6 +15,7 @@
 #include "Dog.hpp"
 #include "WrongAnimal.hpp"
 #include "WrongCat.hpp"
+#include "colors.h"
 
 /*
 Exercise is about polymorphism: The base class pointer can point to derived class objects
@@ -33,11 +34,18 @@ base class destructor when you delete through a base class pointer.
 */
 int main()
 {
+	std::cout << MAG << "[---------- Constructor tests ----------]" << RESET << std::endl;
 	const Animal* meta = new Animal();
 	const Animal* j = new Dog();
 	const Animal* i = new Cat();
+	std::cout << std::endl;
+
+	std::cout << MAG << "[---------- get type tests ----------]" << RESET << std::endl;
 	std::cout << j->getType() << " " << std::endl;
 	std::cout << i->getType() << " " << std::endl;
+	std::cout << std::endl;
+
+	std::cout << MAG << "[---------- make sound tests ----------]" << RESET << std::endl;
 	i->makeSound();
 	j->makeSound();
 	meta->makeSound();
@@ -55,6 +63,7 @@ int main()
 	// wcat.makeSound();
 	// std::cout << std::endl;
 
+	std::cout << MAG << "[---------- Destructors ----------]" << RESET << std::endl;
 	delete i;
 	delete j;
 	delete meta;
